@@ -416,18 +416,18 @@ void GBufferPostDecode(inout FGBufferData Ret, bool bChecker, bool bGetNormalize
 	{
 
 		
-		//Ret.SpecularColor = ComputeF0(Ret.Specular, Ret.BaseColor, Ret.Metallic);
-		//上面为原本的代码
-		//22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
-		if(Ret.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-		{
-			Ret.SpecularColor = float3(0.0f,0.0f,0.0f);
-			//Ret.SpecularColor = Ret.Specular;
-		}
-		else
-		{
-			Ret.SpecularColor = ComputeF0(Ret.Specular, Ret.BaseColor, Ret.Metallic);
-		}
+		Ret.SpecularColor = ComputeF0(Ret.Specular, Ret.BaseColor, Ret.Metallic);
+		// //上面为原本的代码
+		// //22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
+		// if(Ret.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+		// {
+		// 	Ret.SpecularColor = float3(0.0f,0.0f,0.0f);
+		// 	//Ret.SpecularColor = Ret.Specular;
+		// }
+		// else
+		// {
+		// 	Ret.SpecularColor = ComputeF0(Ret.Specular, Ret.BaseColor, Ret.Metallic);
+		// }
 
 
 
@@ -442,18 +442,18 @@ void GBufferPostDecode(inout FGBufferData Ret, bool bChecker, bool bGetNormalize
 
 		
 		
-		//Ret.DiffuseColor = Ret.BaseColor - Ret.BaseColor * Ret.Metallic;
-		//上面为原本的代码
-		//22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
-		if(Ret.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-		{
-			//Ret.DiffuseColor = Ret.BaseColor * 0.1f;
-			Ret.DiffuseColor = float3(0.0f, 0.0f, 0.0f);
-		}
-		else
-		{
-			Ret.DiffuseColor = Ret.BaseColor - Ret.BaseColor * Ret.Metallic;
-		}
+		Ret.DiffuseColor = Ret.BaseColor - Ret.BaseColor * Ret.Metallic;
+		// //上面为原本的代码
+		// //22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
+		// if(Ret.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+		// {
+		// 	//Ret.DiffuseColor = Ret.BaseColor * 0.1f;
+		// 	Ret.DiffuseColor = float3(0.0f, 0.0f, 0.0f);
+		// }
+		// else
+		// {
+		// 	Ret.DiffuseColor = Ret.BaseColor - Ret.BaseColor * Ret.Metallic;
+		// }
 
 
 

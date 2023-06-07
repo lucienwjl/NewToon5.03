@@ -638,19 +638,19 @@ FGBufferData DecodeGBufferData(
 	// derived from BaseColor, Metalness, Specular
 	{
 		
-		//GBuffer.SpecularColor = ComputeF0(GBuffer.Specular, GBuffer.BaseColor, GBuffer.Metallic);
-		//上面为原本的代码
-		//22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
-		BRANCH
-		if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-		{
-			GBuffer.SpecularColor = float3(0.0f, 0.0f,0.0f);
-			//GBuffer.SpecularColor = GBuffer.Specular;
-		}
-		else
-		{
-			GBuffer.SpecularColor = ComputeF0(GBuffer.Specular, GBuffer.BaseColor, GBuffer.Metallic);
-		}
+		GBuffer.SpecularColor = ComputeF0(GBuffer.Specular, GBuffer.BaseColor, GBuffer.Metallic);
+		// //上面为原本的代码
+		// //22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
+		// BRANCH
+		// if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+		// {
+		// 	GBuffer.SpecularColor = float3(0.0f, 0.0f,0.0f);
+		// 	//GBuffer.SpecularColor = GBuffer.Specular;
+		// }
+		// else
+		// {
+		// 	GBuffer.SpecularColor = ComputeF0(GBuffer.Specular, GBuffer.BaseColor, GBuffer.Metallic);
+		// }
 
 
 
@@ -664,19 +664,19 @@ FGBufferData DecodeGBufferData(
 
 
 		
-		//GBuffer.DiffuseColor = GBuffer.BaseColor - GBuffer.BaseColor * GBuffer.Metallic;
-		//上面为原本的代码
-		//22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
-		BRANCH
-		if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-		{
-			//GBuffer.DiffuseColor = GBuffer.BaseColor * 0.1f;
-			GBuffer.DiffuseColor = float3(0.0f, 0.0f, 0.0f);
-		}
-		else
-		{
-			GBuffer.DiffuseColor = GBuffer.BaseColor - GBuffer.BaseColor * GBuffer.Metallic;
-		}
+		GBuffer.DiffuseColor = GBuffer.BaseColor - GBuffer.BaseColor * GBuffer.Metallic;
+		// //上面为原本的代码
+		// //22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
+		// BRANCH
+		// if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+		// {
+		// 	//GBuffer.DiffuseColor = GBuffer.BaseColor * 0.1f;
+		// 	GBuffer.DiffuseColor = float3(0.0f, 0.0f, 0.0f);
+		// }
+		// else
+		// {
+		// 	GBuffer.DiffuseColor = GBuffer.BaseColor - GBuffer.BaseColor * GBuffer.Metallic;
+		// }
 
 
 

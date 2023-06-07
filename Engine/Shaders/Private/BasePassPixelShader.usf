@@ -1209,19 +1209,19 @@ void FPixelShaderInOut_MainPS(
 	
 	// So that the following code can still use DiffuseColor and SpecularColor.
 	
-	//GBuffer.SpecularColor = ComputeF0(Specular, BaseColor, Metallic);
-	//上面为原本的代码
-	//22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
-	BRANCH
-	if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-	{
-		GBuffer.SpecularColor = float3(0.0f, 0.0f, 0.0f);
-		//GBuffer.SpecularColor = Specular;
-	}
-	else
-	{
-		GBuffer.SpecularColor = ComputeF0(Specular, BaseColor, Metallic);
-	}
+	GBuffer.SpecularColor = ComputeF0(Specular, BaseColor, Metallic);
+	// //上面为原本的代码
+	// //22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
+	// BRANCH
+	// if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+	// {
+	// 	GBuffer.SpecularColor = float3(0.0f, 0.0f, 0.0f);
+	// 	//GBuffer.SpecularColor = Specular;
+	// }
+	// else
+	// {
+	// 	GBuffer.SpecularColor = ComputeF0(Specular, BaseColor, Metallic);
+	// }
 
 
 
@@ -1258,19 +1258,19 @@ void FPixelShaderInOut_MainPS(
 
 	
 	//计算Diffuse
-	//GBuffer.DiffuseColor = BaseColor - BaseColor * Metallic;
-	//上面为原本的代码
-	//22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
-	BRANCH
-	if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-	{
-		//GBuffer.DiffuseColor = BaseColor * 0.1f;
-		GBuffer.DiffuseColor = float3(0.0f, 0.0f, 0.0f);
-	}
-	else
-	{
-		GBuffer.DiffuseColor = BaseColor - BaseColor * Metallic;
-	}
+	GBuffer.DiffuseColor = BaseColor - BaseColor * Metallic;
+	// //上面为原本的代码
+	// //22.lucien: 在自定义的shadingmodel下屏蔽原本的Roughness，Metallic，Specualr相关计算
+	// BRANCH
+	// if(GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+	// {
+	// 	//GBuffer.DiffuseColor = BaseColor * 0.1f;
+	// 	GBuffer.DiffuseColor = float3(0.0f, 0.0f, 0.0f);
+	// }
+	// else
+	// {
+	// 	GBuffer.DiffuseColor = BaseColor - BaseColor * Metallic;
+	// }
 
 
 

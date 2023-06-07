@@ -376,7 +376,7 @@ FDeferredLightingSplit GetDynamicLightingSplit(
 		Shadow.HairTransmittance.OpaqueVisibility = 1;
 		const float ContactShadowOpacity = GBuffer.CustomData.a;
 		GetShadowTerms(GBuffer.Depth, GBuffer.PrecomputedShadowFactors, GBuffer.ShadingModelID, ContactShadowOpacity,
-			LightData, TranslatedWorldPosition, L, LightAttenuation, Dither, Shadow);
+			LightData, TranslatedWorldPosition, L, lerp(1.0f, 1.0f, LightAttenuation), Dither, Shadow);
 		SurfaceShadow = Shadow.SurfaceShadow;
 		
 
@@ -441,16 +441,7 @@ FDeferredLightingSplit GetDynamicLightingSplit(
 		#endif
 		}
 
-		
-		// //lucien
-		// else
-		// {
-		// 	if (GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
-		// 	{
-		// 		LightAccumulator.TotalLightDiffuse = GBuffer.BaseColor * GBuffer.CustomData.rgb;
-		// 		LightAccumulator.TotalLightSpecular = 0.0f;
-		// 	}
-		// }
+
 
 
 	}

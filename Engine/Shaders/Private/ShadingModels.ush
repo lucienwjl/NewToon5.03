@@ -831,6 +831,7 @@ FDirectLighting CustomToonBxDF( FGBufferData GBuffer, half3 N, half3 V, half3 L,
 	//Base Data
 	half3 H = normalize(V + L);
 	float NoH = saturate(dot(N, H));
+	
 
 	//Input
 	float3 BaseTexColor     = GBuffer.BaseColor;
@@ -847,14 +848,15 @@ FDirectLighting CustomToonBxDF( FGBufferData GBuffer, half3 N, half3 V, half3 L,
 	//Shadow Color Control
 	float3 ShadowPart = BaseTexColor * ShadowColorTint;
 	//Shadow.SurfaceShadow = AO
-	float ShadowMask = smoothstep(0.0f, ShadowThreshold, Shadow.SurfaceShadow - ShadowRange);
+	float ShadowMask = smoothstep(0.0f, ShadowThreshold, saturate(NoL - ShadowRange));
+	//float ShadowMask = smoothstep(0.0f, ShadowThreshold, Shadow.SurfaceShadow - ShadowRange);
 
 	
 	//Combine
 	FDirectLighting Lighting;
 	Lighting.Diffuse = Diffuse_Lambert(lerp(ShadowPart, BaseTexColor, ShadowMask));
 	//Lighting.Diffuse = BaseTexColor;
-	Lighting.Diffuse = lerp(ShadowPart, BaseTexColor, ShadowMask);
+	//Lighting.Diffuse = lerp(ShadowPart, BaseTexColor, ShadowMask);
 	//Lighting.Specular = NoH * SpecularIntensity - SpecularRange;
 	Lighting.Specular = 0.0f;
 	Lighting.Transmission = 0.0f;

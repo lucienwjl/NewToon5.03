@@ -133,8 +133,9 @@ float3 SkyLightDiffuse(FGBufferData GBuffer, float AmbientOcclusion, float2 Buff
 	// BRANCH
 	// if (GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
 	// {
-	// 	float InnerLine = GBuffer.CustomData.a;
-	// 	Lighting = InnerLine * GBuffer.BaseColor * View.SkyLightColor.rgb;
+	// 	//float InnerLine = GBuffer.CustomData.a;
+	// 	//Lighting = InnerLine * GBuffer.BaseColor * View.SkyLightColor.rgb;
+	// 	Lighting = GBuffer.BaseColor * GBuffer.CustomData.rgb;
 	// 	
 	// 	return Lighting;
 	// }
@@ -148,6 +149,7 @@ float3 SkyLightDiffuse(FGBufferData GBuffer, float AmbientOcclusion, float2 Buff
 	// And accumulate the lighting
 	Lighting += (SkyVisData.SkyDiffuseLookUpMul * DiffuseLookup + SkyVisData.SkyDiffuseLookUpAdd) * DiffuseColor * DiffuseWeight;
 	Lighting *= View.PreExposure;
+
 
 	//Lighting = (Texture2DSampleLevel(BentNormalAOTexture, BentNormalAOSampler, UV, 0).xyz);
 

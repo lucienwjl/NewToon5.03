@@ -267,6 +267,7 @@ void MainPS(
 
 			float3 DiffuseColor = bVisualizeDiffuseIndirect ? float3(.18f, .18f, .18f) : GBuffer.DiffuseColor;
 			float3 SpecularColor = GBuffer.SpecularColor;
+			
 
 			#if DIM_APPLY_DIFFUSE_INDIRECT == 4
 				RemapClearCoatDiffuseAndSpecularColor(GBuffer, NoV, DiffuseColor, SpecularColor);
@@ -343,6 +344,16 @@ void MainPS(
 			IndirectLighting.Specular *= !bChecker;
 		}
 
+		//lucien
+		if (GBuffer.ShadingModelID == SHADINGMODELID_CUSTOM_TOON)
+		{
+			//IndirectLighting.Diffuse = GBuffer.CustomData.rgb * GBuffer.BaseColor;
+			IndirectLighting.Diffuse = 0.0f;
+			IndirectLighting.Specular = 0.0f;
+		}
+
+		
+		
 		FLightAccumulator LightAccumulator = (FLightAccumulator)0;
 		LightAccumulator_Add(
 			LightAccumulator,
